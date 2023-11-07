@@ -21,7 +21,7 @@ int main(void)
 
 		if (read > 0) 
 		{
-			input[read - 1] = '\0'
+			input[read - 1] = '\0';
 
 			if (execute_command(input) == -1) 
 			{
@@ -29,7 +29,9 @@ int main(void)
                 		our_print("Command not found\n");
 			}
         	}
-	
+	free(input);
+	input = NULL;
+	input_size = 0;	
 
 	}
 

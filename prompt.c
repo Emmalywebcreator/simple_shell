@@ -1,4 +1,4 @@
-#include "s_shell.h"
+#include "shell.h"
 #include "main.h"
 /**
  * shell_prompt: display a prompt and wait for user input.
@@ -10,6 +10,8 @@
 ssize_t shell_prompt(char *buf, size_t n)
 {
 	ssize_t no_of_bytes_read;
+	buf = NULL;
+	n = 0;
 
 	_printf("emmy$ ");
 	no_of_bytes_read = getline(&buf, &n, stdin);

@@ -1,4 +1,4 @@
-#include "s_shell.h"
+#include "shell.h"
 #include "main.h"
 
 /**
@@ -14,6 +14,14 @@ int main(void)
 
 	while (true)
 	{
+		if (input == NULL)
+		{
+			input = (char *)malloc(input_size);
+			if(input == NULL)
+			{
+				break;
+			}
+		}
 		read = shell_prompt(input, input_size);
 		if (read == -1)
 		{
@@ -29,8 +37,10 @@ int main(void)
 
                 		_printf("Command not found\n");
 			}
-        	}
 
+        	}
+		free(input);
+		input = NULL;
 	}
 
 	return (0);

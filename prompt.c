@@ -1,4 +1,3 @@
-#include "shell.h"
 #include "main.h"
 /**
  * shell_prompt: display a prompt and wait for user input.

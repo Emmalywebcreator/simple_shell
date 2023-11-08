@@ -1,5 +1,5 @@
 #include "s_shell.h"
-
+#include "main.h"
 /**
  * shell_prompt: display a prompt and wait for user input.
  * buf: a buffer to store the user's input.
@@ -11,8 +11,9 @@ ssize_t shell_prompt(char *buf, size_t n)
 {
 	ssize_t no_of_bytes_read;
 
-	our_print("emmy$ ");	
+	_printf("emmy$ ");
 	no_of_bytes_read = getline(&buf, &n, stdin);
+	_printf("%s", buf);
 	
 	if (no_of_bytes_read == -1)
 	{

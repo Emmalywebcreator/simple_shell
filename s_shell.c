@@ -1,4 +1,5 @@
 #include "s_shell.h"
+#include "main.h"
 
 /**
  * main - entry point
@@ -26,12 +27,9 @@ int main(void)
 			if (execute_command(input) == -1) 
 			{
 
-                		our_print("Command not found\n");
+                		_printf("Command not found\n");
 			}
         	}
-	free(input);
-	input = NULL;
-	input_size = 0;	
 
 	}
 

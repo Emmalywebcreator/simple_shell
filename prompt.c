@@ -9,12 +9,13 @@
 ssize_t shell_prompt(char *buf, size_t n)
 {
 	ssize_t no_of_bytes_read;
+	char *dup_buf, *delimiter = " ", *token;
+
 	buf = NULL;
 	n = 0;
 
 	_printf("emmy$ ");
 	no_of_bytes_read = getline(&buf, &n, stdin);
-	_printf("%s", buf);
 	
 	if (no_of_bytes_read == -1)
 	{
@@ -26,8 +27,25 @@ ssize_t shell_prompt(char *buf, size_t n)
 	if (no_of_bytes_read > 0 && buf[no_of_bytes_read - 1] == '\n')
 	{
 		buf[no_of_bytes_read - 1] = '\0';
-	}
 
+		dup_buf = strdup(buf);
+
+		if (dup_buf == NULL)
+		{
+			perror("strdup");
+			return (-1);
+		}
+		token = strtok(dup_buf, delimiter);
+
+		while (token != NULL)
+		{
+			_printf("%s\n", token);
+
+			token = strtok(NULL, delimiter);
+ 		}
+		free(dup_buf);
+
+	}
 	free(buf);
 	return (no_of_bytes_read);
 }

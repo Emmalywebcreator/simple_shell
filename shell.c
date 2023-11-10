@@ -36,7 +36,6 @@ int main(void)
 
                 		_printf("Command not found\n");
 			}
-
         	}
 		free(input);
 		input = NULL;

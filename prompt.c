@@ -14,7 +14,7 @@ ssize_t shell_prompt(char *buf, size_t n)
 	buf = NULL;
 	n = 0;
 
-	_printf("emmy$ ");
+	_printf("Emmy/Namy/shell$ ");
 	no_of_bytes_read = getline(&buf, &n, stdin);
 	
 	if (no_of_bytes_read == -1)

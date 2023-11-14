@@ -10,6 +10,7 @@
 #include <sys/wait.h>
 #include <stdarg.h>
 int _write_char(char c);
+void execute_command_with_path(char *command, char *args[], char *envp[]);
 int _write_string(const char *str);
 int _write_percent(void);
 int _write_integer(int n);

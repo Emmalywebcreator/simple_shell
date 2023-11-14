@@ -5,41 +5,36 @@
  * Discription:  This is a team project on simple shell
  * Return: (0) always for success
  */
-int main(void)
+int main(int argc, char **argv)
 {
+	char *prompt = "(Emmy/Namy/shel)$ ";
 	char *input = NULL;
 	size_t input_size = 0;
-	ssize_t read;
+	ssize_t input_read;
 
 	while (true)
 	{
-		if (input == NULL)
+		(void)argc; 
+		(void)argv;
+
+		_printf("%s", prompt); 
+
+		if (getline(&input, &input_size, stdin) == -1)
 		{
-			input = (char *)malloc(input_size);
-			if(input == NULL)
-			{
-				break;
-			}
-		}
-		read = shell_prompt(input, input_size);
-		if (read == -1)
-		{
+			perror("getline failed");
 			break;
 		}
 
-		if (read > 0) 
+		input_read = strlen(input);
+		if (input_read > 0 && input[input_read -1] == '\n')
 		{
-			input[read - 1] = '\0';
+			input[input_read -1] = '\0';
+		}
 
-			if (execute_command(input) == -1) 
-			{
+		execute_command(input);
 
-                		_printf("Command not found\n");
-			}
-        	}
 		free(input);
-		input = NULL;
 	}
 
-	return (0);
+	return (EXIT_SUCCESS);
 }

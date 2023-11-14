@@ -14,8 +14,8 @@ int _write_string(const char *str);
 int _write_percent(void);
 int _write_integer(int n);
 int _printf(const char *format, ...);
-int execute_command(const char *command);
-ssize_t shell_prompt(char *buf, size_t n);
+int execute_command(char *command);
+ssize_t user_input(char *buf, size_t n);
 void our_print(const char *format);
 
 

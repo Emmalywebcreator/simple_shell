@@ -35,7 +35,6 @@ int main(int argc, char **argv)
 
 		execute_command(input);
 
-		free(input);
 	}
 
 	return (EXIT_SUCCESS);

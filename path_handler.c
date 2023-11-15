@@ -37,15 +37,11 @@ void execute_command_using_path(char *command, char *args[], char *envp[])
 			else
 			{
 				waitpid(pid, NULL, 0);
-				free(path_full);
-				free(copy_path);
 				return;
 			}
 		}
-		free(path_full);
 		dir_token = strtok(NULL, ":");
 	}
-	free(copy_path);
 	fprintf(stderr, "Command not found: %s\n", command);
 	exit(EXIT_FAILURE);
 }

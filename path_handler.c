@@ -15,8 +15,8 @@ void execute_command_using_path(char *command, char *args[], char *envp[])
 
 	while (dir_token != NULL)
 	{
-		char *path_full = malloc(strlen(dir_token)
-					+ strlen("/") + strlen(command) + 1);
+		char *path_full = malloc(_strlen(dir_token)
+					+ _strlen("/") + _strlen(command) + 1);
 
 		sprintf(path_full, "%s/%s", dir_token, command);
 		if (access(path_full, X_OK) == 0)

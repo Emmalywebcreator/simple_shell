@@ -15,7 +15,7 @@ int execute_command(char *input)
 	char *envp[] = { NULL };
 	int i;
 
-	input_dup = strdup(input);
+	input_dup = _strdup(input);
 	if (input_dup == NULL)
 	{
 		perror("Memory allocation failed");

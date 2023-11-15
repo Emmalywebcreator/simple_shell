@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 			break;
 		}
 
-		input_read = strlen(input);
+		input_read = _strlen(input);
 		if (input_read > 0 && input[input_read - 1] == '\n')
 		{
 			input[input_read - 1] = '\0';

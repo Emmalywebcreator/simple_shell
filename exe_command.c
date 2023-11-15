@@ -3,7 +3,6 @@
 int execute_command(char *input)
 {
 	char *token, *delim = " ";
-	pid_t pid;
 	char *input_dup;
 	char *args[50]; 
 	char *envp[] = { NULL };
@@ -13,7 +12,6 @@ int execute_command(char *input)
 	if (input_dup == NULL)
 	{
 		perror("Memory allocation failed");
-		free(input);
 		exit(EXIT_FAILURE);
 	}
 
@@ -26,30 +24,10 @@ int execute_command(char *input)
 		token = strtok(NULL, delim);
 	}
 	args[i] = NULL;
+	
+	execute_command_using_path(args[0], args, envp);
 
-	pid = fork();
-
-	if (pid == 0) 
-	{
-		execve(args[0], args, envp);
-		perror("Command execution failed");
-		free(input_dup);
-		free(input);
-		exit(EXIT_FAILURE);
-	}
-
-	else if (pid < 0)
-	{
-		perror("Forking failed");
-		free(input_dup);
-		free(input);
-	}
-	else
-	{
-		waitpid(pid, NULL, 0);
-
-		free(input_dup);
-	}
+	free(input_dup);
 
 	return (0);
 }

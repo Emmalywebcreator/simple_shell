@@ -8,6 +8,7 @@ void execute_command_using_path(char *command, char *args[], char *envp[])
 	char *path = getenv("PATH");
 	char *copy_path = strdup(path);
 	char *dir_token = strtok(copy_path, ":");
+	pid_t pid;
 
 	while (dir_token != NULL)
 	{
@@ -17,7 +18,7 @@ void execute_command_using_path(char *command, char *args[], char *envp[])
 		sprintf(path_full, "%s/%s", dir_token, command);
 		if (access(path_full, X_OK) == 0) 
 		{
-			pid_t pid = fork();
+			pid = fork();
 
 			if (pid == 0) 
 			{

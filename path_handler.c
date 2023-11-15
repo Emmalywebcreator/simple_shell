@@ -1,7 +1,10 @@
 #include "main.h"
-/*
- *execute_command_using_path - This executes using the command without /bin
- *return: Always (0)
+/**
+ * execute_command_using_path - execute user command without /bin
+ * @command: user input
+ * @args: argument
+ * @envp: environ
+ * Return: nothig
  */
 void execute_command_using_path(char *command, char *args[], char *envp[])
 {
@@ -16,17 +19,17 @@ void execute_command_using_path(char *command, char *args[], char *envp[])
 					+ strlen("/") + strlen(command) + 1);
 
 		sprintf(path_full, "%s/%s", dir_token, command);
-		if (access(path_full, X_OK) == 0) 
+		if (access(path_full, X_OK) == 0)
 		{
 			pid = fork();
 
-			if (pid == 0) 
+			if (pid == 0)
 			{
 				execve(path_full, args, envp);
 				perror("Command execution failed");
 				exit(EXIT_FAILURE);
 			}
-			else if (pid < 0) 
+			else if (pid < 0)
 			{
 				perror("Fork failed");
 				exit(EXIT_FAILURE);
@@ -39,11 +42,9 @@ void execute_command_using_path(char *command, char *args[], char *envp[])
 				return;
 			}
 		}
-
 		free(path_full);
 		dir_token = strtok(NULL, ":");
 	}
-	/*Free the path here*/
 	free(copy_path);
 	fprintf(stderr, "Command not found: %s\n", command);
 	exit(EXIT_FAILURE);

@@ -3,6 +3,8 @@
 /**
  * main - entry point
  * Discription:  This is a team project on simple shell
+ * @argc: argument count
+ * @argv: argument vector
  * Return: (0) always for success
  */
 int main(int argc, char **argv)
@@ -14,10 +16,10 @@ int main(int argc, char **argv)
 
 	while (true)
 	{
-		(void)argc; 
+		(void)argc;
 		(void)argv;
 
-		_printf("%s", prompt); 
+		_printf("%s", prompt);
 
 		if (getline(&input, &input_size, stdin) == -1)
 		{
@@ -26,9 +28,9 @@ int main(int argc, char **argv)
 		}
 
 		input_read = strlen(input);
-		if (input_read > 0 && input[input_read -1] == '\n')
+		if (input_read > 0 && input[input_read - 1] == '\n')
 		{
-			input[input_read -1] = '\0';
+			input[input_read - 1] = '\0';
 		}
 
 		execute_command(input);

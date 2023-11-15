@@ -1,10 +1,17 @@
 #include "main.h"
 
+/**
+ * execute_command - Execute commands receivve from users
+ * @input: command receive from user
+ * Return: 0 for sucess
+ */
+
+
 int execute_command(char *input)
 {
 	char *token, *delim = " ";
 	char *input_dup;
-	char *args[50]; 
+	char *args[50];
 	char *envp[] = { NULL };
 	int i;
 
@@ -24,7 +31,7 @@ int execute_command(char *input)
 		token = strtok(NULL, delim);
 	}
 	args[i] = NULL;
-	
+
 	execute_command_using_path(args[0], args, envp);
 
 	free(input_dup);

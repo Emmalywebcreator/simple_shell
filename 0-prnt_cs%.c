@@ -1,45 +1,53 @@
 #include <stdio.h>
 #include "main.h"
+
 /**
- * _write_char - Writes a character to stdout.
- * @c: The character to be written.
- * Return: The number of characters written.
- 
-int _write_char(char c)
-{
-	return (write(1, &c, 1));
+ * _print_regular - helper function to print characters that are not '%'
+ * @chr_count: Pointer to the character count
+ * @format: Current position in the format string
+ * Return: void
+ */
 
- * _write_string - Writes a string to stdout.
- * @str: The string to be written.
- * Return: The number of characters written.
- 
-int _write_string(const char *str)
+static void _print_regular(int *chr_count, const char **format)
 {
-	int str_len = 0;
-
-	while (str[str_len] != '\0')
-		str_len++;
-	return (write(1, str, str_len));
-	}
- * _write_percent - Writes a % character to stdout.
- * Return: The number of characters written.
- 
-int _write_percent(void)
-{
-	return (write(1, "%", 1));
+	*chr_count += _write_char(**format);
+	(*format)++;
 }
+/**
+ * _print_format - Helper function to handle the format specifiers
+ * @chr_count: Pointer to the character count
+ * @format: Current position in the format string
+ * @no_args: Argument list for va_arg
+ * Return: void
+ */
 
- * _write_integer - Writes an interger to stdout
- * @n: The integer to be written
- * Return: The number of characters written to buffer
-
-int _write_integer(int n)
+static void _print_format(int *chr_count, const char **format, va_list no_args)
 {
-	char buffer[32];
-	int length = snprintf(buffer, sizeof(buffer), "%d", n);
+	(*format)++;
+	if (**format == '\0')
+		return;
 
-	return (write(1, buffer, length));
-}*/
+	if (**format == 'c')
+	{
+		char c = va_arg(no_args, int);
+		*chr_count += _write_char(c);
+	}
+	else if (**format == 's')
+	{
+		char *str = va_arg(no_args, char*);
+		*chr_count += _write_string(str);
+	}
+	else if (**format == 'd' || **format == 'i')
+	{
+		int number = va_arg(no_args, int);
+		*chr_count += _write_integer(number);
+	}
+	else if (**format == '%')
+	{
+		*chr_count += _write_percent();
+	}
+	(*format)++;
+}
 /**
  * _printf - This function prints variable n. or argument
  * like the standard printf function
@@ -50,49 +58,25 @@ int _write_integer(int n)
 int _printf(const char *format, ...)
 {
 	int chr_count = 0;
-	va_list no_input_args;
+	va_list no_args;
 
 	if (format == NULL)
 		return (-1);
-	va_start(no_input_args, format);
+
+	va_start(no_args, format);
+
 	while (*format)
 	{
 		if (*format != '%')
 		{
-			chr_count += _write_char(*format);
+			_print_regular(&chr_count, &format);
 		}
 		else
 		{
-			format++;
-			if (*format == '\0')
-			{
-				break;
-			}
-			if (*format == 'c')
-			{
-				char c = va_arg(no_input_args, int);
-
-				chr_count += _write_char(c);
-			}
-			else if (*format == 's')
-			{
-				char *str = va_arg(no_input_args, char*);
-
-				chr_count += _write_string(str);
-			}
-			else if (*format == 'd' || *format == 'i')
-			{
-				int number = va_arg(no_input_args, int);
-
-				chr_count += _write_integer(number);
-			}
-			else if (*format == '%')
-			{
-				chr_count += _write_percent();
-			}
+			_print_format(&chr_count, &format, no_args);
 		}
-		format++;
 	}
-	va_end(no_input_args);
+
+	va_end(no_args);
 	return (chr_count);
 }

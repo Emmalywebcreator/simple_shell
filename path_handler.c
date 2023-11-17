@@ -40,6 +40,7 @@ void execute_command_using_path(char *command, char *args[], char *envp[])
 				return;
 			}
 		}
+		free(path_full);
 		dir_token = strtok(NULL, ":");
 	}
 	fprintf(stderr, "Command not found: %s\n", command);

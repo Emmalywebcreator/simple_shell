@@ -39,7 +39,7 @@ char *custom_getline(void)
 		line_start[lineSize++] = (char)c;
 	}
 	line_start = realloc(line_start, lineSize + 1);
-	if (line_start = NULL)
+	if (line_start == NULL)
 	{
 		perror("Memory allocation error");
 		exit(EXIT_FAILURE);

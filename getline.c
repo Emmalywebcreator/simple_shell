@@ -5,12 +5,12 @@
  */
 int getline_function(void)
 {
-	char *line;
+	char *line_start;
 
-	while ((line = custom_getline()) != NULL)
+	while ((line_start = custom_getline()) != NULL)
 	{
-		_printf("Read line: %s\n", line);
-		free(line);
+		_printf("Read line: %s\n", line_start);
+		free(line_start);
 	}
 	return (0);
 }

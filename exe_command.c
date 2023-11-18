@@ -23,12 +23,12 @@ int execute_command(char *input)
 	}
 
 	i = 0;
-	token = strtok(input_dup, delim);
+	token = _strtok(input_dup, delim);
 	while (token != NULL && i < 49)
 	{
 		args[i++] = token;
 		_printf("%s\n", token);
-		token = strtok(NULL, delim);
+		token = _strtok(NULL, delim);
 	}
 	args[i] = NULL;
 

@@ -1,37 +1,39 @@
 #include "main.h"
+/**
+ * _strtok - tokenise a string
+ * @str: string to be tokenise
+ * @delim: delimeter
+ * Return: pointer to the next token, or NULL if no more tokens
+ */
 
-
- void _strtok(const char *str, char delim)
+ char *_strtok(char *str, const char *delim)
 {
-	int len = _strlen((char*)str);
-	int i, j;
+	char *start;
+	static char *current;
 
-	char *word = malloc(len + 1);
-	if (word == NULL)
+	if (str != NULL)
 	{
-		perror("Memory allocation failed");
-		exit(EXIT_FAILURE);
+		current = str;
 	}
-	
-	for (i = 0; i < len; i++)
+	if (current == NULL || *current == '\0')
 	{
-		j = 0;
-		if (str[i] == delim || str[i] == '\0')
-		{
-			word[j] = '\0';
-			if (j > 0)
-			{
-				_printf("%s\n", word);
-
-				j = 0;
-			}
-		}
-		else
-		{
-			word[j++] = str[i];
-		}
-
+		return (NULL);
 	}
-	free(word);
+	while (*current != '\0' && strchr(delim, *current) != NULL)
+	{
+		current++;
+	}
+
+	start = current;
+	while (*current != '\0' && strchr(delim, *current) == NULL)
+	{
+		current++;
+	}
+	if (*current != '\0')
+	{
+		*current = '\0';
+		current++;
+	}
+	return (start);
 }
 

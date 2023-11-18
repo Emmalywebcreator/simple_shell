@@ -25,5 +25,6 @@ int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
 char *_strdup(const char *str);
 void display_prompt();
-
+void handle_exit_command(char *command);
+char *_strtok(char *str, const char *delim);
 #endif

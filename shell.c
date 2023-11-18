@@ -42,7 +42,8 @@ int main(int argc, char **argv)
 			{
 				input[input_read - 1] = '\0';
 			}
-
+			
+			handle_exit_command(input);
 			execute_command(input);
 
 		}

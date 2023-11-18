@@ -6,7 +6,7 @@
  */
 void handle_exit_command(char *command)
 {
-	if (strcmp(command, "exit") == 0)
+	if (_strcmp(command, "exit") == 0)
 	{
 		exit(EXIT_SUCCESS);
 	}

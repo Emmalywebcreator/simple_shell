@@ -8,8 +8,8 @@
 char *custom_getline(void)
 {
 	static char buffer[BUFFER_SIZE];
-	static size_t index = 0;
-	static size_t size = 0;
+	static size_t index;
+	static size_t size;
 	char *line_start = NULL;
 	size_t lineSize = 0;
 	int c;
@@ -19,7 +19,7 @@ char *custom_getline(void)
 		size = read(0, buffer, BUFFER_SIZE);
 		if (size <= 0)
 		{
-			return NULL;
+			return (NULL);
 		}
 		index = 0;
 	}
@@ -31,7 +31,7 @@ char *custom_getline(void)
 			break;
 		}
 		line_start = realloc(line_start, lineSize + 1);
-		if(line_start == NULL)
+		if (line_start == NULL)
 		{
 			perror("Memory allocation error");
 			exit(EXIT_FAILURE);
@@ -45,5 +45,5 @@ char *custom_getline(void)
 		exit(EXIT_FAILURE);
 	}
 	line_start[lineSize] = '\0';
-	return line_start;
+	return (line_start);
 }

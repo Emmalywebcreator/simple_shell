@@ -2,7 +2,7 @@
 /**
  * display_prompt - display a prompt for user input
  */
-void display_prompt()
+void display_prompt(void)
 {
 	char *prompt = "(Emmy/Namy/shel)$ ";
 
@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	size_t input_size = 0;
 	ssize_t input_read;
 
-	if(isatty(0))
+	if (isatty(0))
 	{
 		while (true)
 		{
@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 			{
 				input[input_read - 1] = '\0';
 			}
-			
+
 			handle_exit_command(input);
 			execute_command(input);
 

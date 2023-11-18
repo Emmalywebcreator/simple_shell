@@ -6,7 +6,7 @@
  * Return: pointer to the next token, or NULL if no more tokens
  */
 
- char *_strtok(char *str, const char *delim)
+char *_strtok(char *str, const char *delim)
 {
 	char *start;
 	static char *current;
